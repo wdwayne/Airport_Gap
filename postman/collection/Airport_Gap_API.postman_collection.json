@@ -1,0 +1,599 @@
+{
+  "info": {
+    "_postman_id": "2bc89dcf-3f64-493c-972b-01b433022c1f",
+    "name": "Airport_Gap_API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "17912757"
+  },
+  "item": [
+    {
+      "name": "Positive flow",
+      "item": [
+        {
+          "name": "GetAirportAPIToken",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contain token\", function () {\r",
+                  "    pm.expect(pm.response.json().token).to.not.be.undefined;\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"email\": \"{{email}}\", \r\n   \"password\": \"{{password}}\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/tokens",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "tokens"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllAirports",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint returns with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains links object\", function () {\r",
+                  "    pm.response.to.have.jsonBody('links');\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/airports",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "airports"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAirportByID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const airportID = pm.environment.get(\"airportID\")\r",
+                  "\r",
+                  "\r",
+                  "pm.test(\"Verify endpoint returns with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify the returened airport ID matches the searched ID\", function() {\r",
+                  "    pm.expect(pm.response.json().data.id).to.eql(airportID);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/airports/{{airportID}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "airports",
+                "{{airportID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "AddFavoriteAirport",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "const json_data = pm.response.json();\r",
+                  "pm.environment.set(\"favoriteID\", json_data.data.id);\r",
+                  "console.log(json_data)\r",
+                  "\r",
+                  "pm.test(\"Verify endpoint with 201 created response\", function () {\r",
+                  "    pm.response.to.have.status(201);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \"On place to go.\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/favorites",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetFavorites",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint returns all airports with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains links object\", function () {\r",
+                  "    pm.response.to.have.jsonBody('links');\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/favorites",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetFavoritesByID",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint returns with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/favorites/{{favoriteID}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites",
+                "{{favoriteID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAirportDistance",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint returns with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify from_airport and to_airport are returned\", function () {\r",
+                  "    pm.expect(pm.response.json().data.attributes.from_airport && pm.response.json().data.attributes.to_airport).to.exist\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify distance in kilometers is returned\", function () {\r",
+                  "    pm.expect(pm.response.json().data.attributes.kilometers).to.exist\r",
+                  "})\r",
+                  "pm.test(\"Verify distance in miles is returned\", function () {\r",
+                  "    pm.expect(pm.response.json().data.attributes.miles).to.exist\r",
+                  "})\r",
+                  "pm.test(\"Verify distance in nautical miles is returned\", function () {\r",
+                  "    pm.expect(pm.response.json().data.attributes.nautical_miles).to.exist\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n   \"from\": \"KIX\", \r\n   \"to\": \"NRT\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/airports/distance",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "airports",
+                "distance"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "EditFavorite",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "\r",
+                  "\r",
+                  "pm.test(\"Verify endpoint with 200 created response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"note\": \"Udated entry\"\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/favorites/{{favoriteID}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites",
+                "{{favoriteID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GetAllAirports_paginated",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test(\"Verify endpoint returns with 200 OK response\", function () {\r",
+                  "    pm.response.to.have.status(200);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains data array\", function () {\r",
+                  "    pm.response.to.have.jsonBody('data');\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response body contains links object\", function () {\r",
+                  "    pm.response.to.have.jsonBody('links');\r",
+                  "})"
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseURL}}/airports?page=5",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "airports"
+              ],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "5"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DeleteFavorite",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "\r",
+                  "\r",
+                  "pm.test(\"Verify endpoint with 204 No Content response\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/favorites/{{favoriteID}}",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites",
+                "{{favoriteID}}"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "ClearAllFavorites",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "\r",
+                  "\r",
+                  "pm.test(\"Verify endpoint with 204 No Content response\", function () {\r",
+                  "    pm.response.to.have.status(204);\r",
+                  "})\r",
+                  "\r",
+                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                  "})\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseURL}}/favorites/clear_all",
+              "host": [
+                "{{baseURL}}"
+              ],
+              "path": [
+                "favorites",
+                "clear_all"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Negative flow",
+      "item": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{authToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ]
+}
