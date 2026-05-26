@@ -14,6 +14,7 @@ This project consists of automated API tests for the AIrport Gap API using Postm
 - CRUD functionalities
 - Performance testing 
 - Validation 
+- Security
 
 *Out Of Scope*
 - Third party integration
