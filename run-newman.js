@@ -4,9 +4,14 @@ const newman = require("newman");
 newman.run({
     collection: require('./postman/collection/Airport_Gap_API.postman_collection.json'),
     environment: require('./postman/environment/Airport_Gap.postman_environment.json'),
-    reporters: "cli",
+    reporters: ['cli', 'html'],
+    reporter: {
+        html: {
+            export: 'reports/report.html'
+        }
+    },
     envVar: [
-        {key: 'authToken', value: process.env.AUTH_TOKEN},
+        // {key: 'authToken', value: process.env.AUTH_TOKEN},
         {key: 'email', value: process.env.EMAIL},
         {key: 'password', value: process.env.PASSWORD}
     ]

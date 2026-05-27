@@ -16,6 +16,9 @@
               "listen": "test",
               "script": {
                 "exec": [
+                  "const json_data = pm.response.json();\r",
+                  "pm.environment.set(\"authToken\", json_data.token, \"secret\");\r",
+                  "\r",
                   "pm.test(\"Verify endpoint with 200 OK response\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "})\r",
@@ -156,7 +159,6 @@
                 "exec": [
                   "const json_data = pm.response.json();\r",
                   "pm.environment.set(\"favoriteID\", json_data.data.id);\r",
-                  "console.log(json_data)\r",
                   "\r",
                   "pm.test(\"Verify endpoint with 201 created response\", function () {\r",
                   "    pm.response.to.have.status(201);\r",
@@ -182,7 +184,7 @@
             "header": [],
             "body": {
               "mode": "raw",
-              "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \"On place to go.\"\r\n}",
+              "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \"\"\r\n}",
               "options": {
                 "raw": {
                   "language": "json"
@@ -555,7 +557,7 @@
       ]
     },
     {
-      "name": "Negative flow",
+      "name": "Negative Tests",
       "item": [
         {
           "name": "Auth",
@@ -1169,6 +1171,462 @@
                   "path": [
                     "airports",
                     "distance"
+                  ]
+                }
+              },
+              "response": []
+            }
+          ]
+        },
+        {
+          "name": "Favorite_Airport",
+          "item": [
+            {
+              "name": "NoAirportIdSubmitted",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint with 422 error\", function () {\r",
+                      "    pm.response.to.have.status(422);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains error arrays\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify that an approiprite error message is returned\", function () {\r",
+                      "    pm.expect(pm.response.json().errors[0].detail).to.include(\"Please enter a valid airport code\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"airport_id\": \"\",\r\n    \"note\": \"On place to go.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EmptyJSONData",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint with 422 error\", function () {\r",
+                      "    pm.response.to.have.status(422);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains error arrays\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify that an approiprite error message is returned\", function () {\r",
+                      "    pm.expect(pm.response.json().errors[0].detail).to.include(\"Please enter a valid airport code\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"airport_id\": \"\",\r\n    \"note\": \"\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "MalformedJSONData",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint with 400 error\", function () {\r",
+                      "    pm.response.to.have.status(400);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SubmitWithInvalidId",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint returns with 404 status code\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains specific error details\", function () {\r",
+                      "    pm.expect(pm.response.json().errors[0].detail).to.eql(\"The page you requested could not be found\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/favorites/25000",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "25000"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SubmitWithLettersInteadOfNumbers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint returns with 404 status code\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains specific error details\", function () {\r",
+                      "    pm.expect(pm.response.json().errors[0].detail).to.eql(\"The page you requested could not be found\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/favorites/AB",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "AB"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SubmitWithSymbolsInteadOfNumbers Copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint returns with 404 status code\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains specific error details\", function () {\r",
+                      "    pm.expect(pm.response.json().errors[0].detail).to.eql(\"The page you requested could not be found\");\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/favorites/@@",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "@@"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "EditInvalidID",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "\r",
+                      "\r",
+                      "pm.test(\"Verify endpoint with 404 error\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\": \"Udated entry\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites/25000",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "25000"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "LettersInsteadOfNumbers",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "\r",
+                      "\r",
+                      "pm.test(\"Verify endpoint with 404 error\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\": \"Udated entry\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites/ABC",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "ABC"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "SymbolsInsteadOfNumbers Copy",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "\r",
+                      "\r",
+                      "pm.test(\"Verify endpoint with 404 error\", function () {\r",
+                      "    pm.response.to.have.status(404);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "method": "PATCH",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"note\": \"Udated entry\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites/!!!",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "!!!"
                   ]
                 }
               },
