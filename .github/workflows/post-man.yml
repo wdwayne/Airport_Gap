@@ -31,7 +31,7 @@ jobs:
         run: mkdir -p reports
 
       - name: Run Newman tests
-        run: node run-tests.js
+        run: node run-newman.js
 
       - name: Upload HTML report
         uses: actions/upload-artifact@v4
