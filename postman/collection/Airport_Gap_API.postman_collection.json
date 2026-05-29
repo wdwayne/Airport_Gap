@@ -1640,299 +1640,685 @@
       "name": "Security",
       "item": [
         {
-          "name": "InvalidEmailLogin",
-          "event": [
+          "name": "Auth",
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint returns a 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.expect(pm.response.json().errors).to.not.be.undefined;\r",
-                  "})"
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n   \"email\": \"this@email.com\", \r\n   \"password\": \"{{password}}\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+              "name": "InvalidEmailLogin",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint returns a 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.expect(pm.response.json().errors).to.not.be.undefined;\r",
+                      "})"
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
                 }
-              }
-            },
-            "url": {
-              "raw": "{{baseURL}}/tokens",
-              "host": [
-                "{{baseURL}}"
               ],
-              "path": [
-                "tokens"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "UnauthenticatedGetFavorites",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.response.to.have.jsonBody('errors');\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "})\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/favorites",
-              "host": [
-                "{{baseURL}}"
-              ],
-              "path": [
-                "favorites"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "UnauthenticatedGetFavoritesById",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.response.to.have.jsonBody('errors');\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "})\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "{{baseURL}}/favorites/2202",
-              "host": [
-                "{{baseURL}}"
-              ],
-              "path": [
-                "favorites",
-                "2202"
-              ]
-            }
-          },
-          "response": []
-        },
-        {
-          "name": "UnauthenticatedCreateFavorites",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.response.to.have.jsonBody('errors');\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "})\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "POST",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \"On list of places to go.\"\r\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
+              "request": {
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n   \"email\": \"this@email.com\", \r\n   \"password\": \"{{password}}\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/tokens",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "tokens"
+                  ]
                 }
-              }
+              },
+              "response": []
             },
-            "url": {
-              "raw": "{{baseURL}}/favorites",
-              "host": [
-                "{{baseURL}}"
+            {
+              "name": "UnauthenticatedGetFavorites",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
               ],
-              "path": [
-                "favorites"
-              ]
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/favorites",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UnauthenticatedGetFavoritesById",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "GET",
+                "header": [],
+                "url": {
+                  "raw": "{{baseURL}}/favorites/2202",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "2202"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UnauthenticatedCreateFavorites",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "POST",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\r\n    \"airport_id\": \"GKA\",\r\n    \"note\": \"On list of places to go.\"\r\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UnauthenticatedDelete",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites/{{favoriteID}}",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "{{favoriteID}}"
+                  ]
+                }
+              },
+              "response": []
+            },
+            {
+              "name": "UnauthenticatedClearAll",
+              "event": [
+                {
+                  "listen": "test",
+                  "script": {
+                    "exec": [
+                      "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
+                      "    pm.response.to.have.status(401);\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response body contains errors array\", function () {\r",
+                      "    pm.response.to.have.jsonBody('errors');\r",
+                      "})\r",
+                      "\r",
+                      "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                      "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                      "})\r",
+                      ""
+                    ],
+                    "type": "text/javascript",
+                    "packages": {},
+                    "requests": {}
+                  }
+                }
+              ],
+              "request": {
+                "auth": {
+                  "type": "noauth"
+                },
+                "method": "DELETE",
+                "header": [],
+                "body": {
+                  "mode": "raw",
+                  "raw": "",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseURL}}/favorites/clear_all",
+                  "host": [
+                    "{{baseURL}}"
+                  ],
+                  "path": [
+                    "favorites",
+                    "clear_all"
+                  ]
+                }
+              },
+              "response": []
             }
-          },
-          "response": []
+          ]
         },
         {
-          "name": "UnauthenticatedDelete",
-          "event": [
+          "name": "SQLi",
+          "item": [
             {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.response.to.have.jsonBody('errors');\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "})\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
+              "name": "AIrport_Distance",
+              "item": [
+                {
+                  "name": "EmailFieldInjectionAttempt",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Verify endpoint returns a 401 Unauthorized error\", function () {\r",
+                          "    pm.response.to.have.status(401);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response body contains errors array\", function () {\r",
+                          "    pm.expect(pm.response.json().errors).to.not.be.undefined;\r",
+                          "})"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"email\": \"'1'='1\", \r\n   \"password\": \"test\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseURL}}/tokens",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "tokens"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "AirportDistanceBooleanTest",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Verify endpoint returns with 422 status code\", function () {\r",
+                          "    pm.response.to.have.status(422);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response body contains errors array\", function () {\r",
+                          "    pm.response.to.have.jsonBody('errors');\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"from\": \"KIX' OR '1'='1\", \r\n   \"to\": \"NRT\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseURL}}/airports/distance",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "distance"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "AirportDistanceQuoteBreaking",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Verify endpoint returns with 422 status code\", function () {\r",
+                          "    pm.response.to.have.status(422);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response body contains errors array\", function () {\r",
+                          "    pm.response.to.have.jsonBody('errors');\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"from\": \"KIX'\", \r\n   \"to\": \"NRT\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseURL}}/airports/distance",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "distance"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "AirportDistanceCommentInjection",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Verify endpoint returns with 422 status code\", function () {\r",
+                          "    pm.response.to.have.status(422);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response body contains errors array\", function () {\r",
+                          "    pm.response.to.have.jsonBody('errors');\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"from\": \"KIX'--\", \r\n   \"to\": \"NRT\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseURL}}/airports/distance",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "distance"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "AirportDistanceTimeBased",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Verify endpoint returns with 422 status code\", function () {\r",
+                          "    pm.response.to.have.status(422);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response body contains errors array\", function () {\r",
+                          "    pm.response.to.have.jsonBody('errors');\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})"
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "POST",
+                    "header": [],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\r\n   \"from\": \"KIX'; SELECT pg_sleep(5)--\", \r\n   \"to\": \"NRT\"\r\n}",
+                      "options": {
+                        "raw": {
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseURL}}/airports/distance",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "distance"
+                      ]
+                    }
+                  },
+                  "response": []
                 }
-              }
+              ]
             },
-            "url": {
-              "raw": "{{baseURL}}/favorites/{{favoriteID}}",
-              "host": [
-                "{{baseURL}}"
-              ],
-              "path": [
-                "favorites",
-                "{{favoriteID}}"
+            {
+              "name": "Get_AIrPort_Params",
+              "item": [
+                {
+                  "name": "GetAirportsBool",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status code is 404\", function () {\r",
+                          "    pm.response.to.have.status(404);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Response time is less than 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})\r",
+                          "pm.test(\"Response body contains error message\", function () {\r",
+                          "    pm.expect(pm.response.text()).to.include(\"The page you requested could not be found\");\r",
+                          "})\r",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseURL}}/airports/'1'='1",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "'1'='1"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "GetAirportsQuoteBreaking",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status code is 404\", function () {\r",
+                          "    pm.response.to.have.status(404);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Response time is less than 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})\r",
+                          "pm.test(\"Response body contains error message\", function () {\r",
+                          "    pm.expect(pm.response.text()).to.include(\"The page you requested could not be found\");\r",
+                          "})\r",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseURL}}/airports/KIX'",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "airports",
+                        "KIX'"
+                      ]
+                    }
+                  },
+                  "response": []
+                },
+                {
+                  "name": "GetAirportsComments",
+                  "event": [
+                    {
+                      "listen": "test",
+                      "script": {
+                        "exec": [
+                          "pm.test(\"Status code is 404\", function () {\r",
+                          "    pm.response.to.have.status(404);\r",
+                          "})\r",
+                          "\r",
+                          "pm.test(\"Response time is less than 500ms\", function () {\r",
+                          "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
+                          "})\r",
+                          ""
+                        ],
+                        "type": "text/javascript",
+                        "packages": {},
+                        "requests": {}
+                      }
+                    }
+                  ],
+                  "request": {
+                    "method": "GET",
+                    "header": [],
+                    "url": {
+                      "raw": "{{baseURL}}/api/airports/KIX%27--",
+                      "host": [
+                        "{{baseURL}}"
+                      ],
+                      "path": [
+                        "api",
+                        "airports",
+                        "KIX%27--"
+                      ]
+                    }
+                  },
+                  "response": []
+                }
               ]
             }
-          },
-          "response": []
-        },
-        {
-          "name": "UnauthenticatedClearAll",
-          "event": [
-            {
-              "listen": "test",
-              "script": {
-                "exec": [
-                  "pm.test(\"Verify endpoint return with 401 Unauthorized error\", function () {\r",
-                  "    pm.response.to.have.status(401);\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response body contains errors array\", function () {\r",
-                  "    pm.response.to.have.jsonBody('errors');\r",
-                  "})\r",
-                  "\r",
-                  "pm.test(\"Verify response is returened in under 500ms\", function () {\r",
-                  "    pm.expect(pm.response.responseTime).to.be.below(500);\r",
-                  "})\r",
-                  ""
-                ],
-                "type": "text/javascript",
-                "packages": {},
-                "requests": {}
-              }
-            }
-          ],
-          "request": {
-            "auth": {
-              "type": "noauth"
-            },
-            "method": "DELETE",
-            "header": [],
-            "body": {
-              "mode": "raw",
-              "raw": "",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            },
-            "url": {
-              "raw": "{{baseURL}}/favorites/clear_all",
-              "host": [
-                "{{baseURL}}"
-              ],
-              "path": [
-                "favorites",
-                "clear_all"
-              ]
-            }
-          },
-          "response": []
+          ]
         }
       ]
     }
