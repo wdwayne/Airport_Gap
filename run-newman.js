@@ -7,7 +7,7 @@ newman.run({
     reporters: ['cli', 'htmlextra'],
     reporter: {
         htmlextra: {
-            export: 'reports/newman/'
+            export: 'reports/newman/report.html'
         }
     },
     envVar: [
