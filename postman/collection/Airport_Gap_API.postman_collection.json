@@ -2,6 +2,7 @@
   "info": {
     "_postman_id": "2bc89dcf-3f64-493c-972b-01b433022c1f",
     "name": "Airport_Gap_API",
+    "description": "This collection provides comprehensive test coverage for the Airport Gap API, a RESTful service for exploring airport data, calculating distances between airports, and managing a personalized list of favorite airports. The functional areas covered include authentication via token generation, paginated airport listings, individual airport lookups, distance calculations between two airports, and full CRUD operations on favorite airports.",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
     "_exporter_id": "17912757"
   },
@@ -22,7 +23,6 @@
                   "pm.test(\"Verify endpoint with 200 OK response\", function () {\r",
                   "    pm.response.to.have.status(200);\r",
                   "})\r",
-                  "\r",
                   "\r",
                   "pm.test(\"Verify response body contain token\", function () {\r",
                   "    pm.expect(pm.response.json().token).to.not.be.undefined;\r",

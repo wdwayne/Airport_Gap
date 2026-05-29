@@ -68,4 +68,34 @@ Authenticcation the Airport Gap API was handled via Bearer Authentication inorde
 # Test Data Management
 Data was managed using Postman environment variables.
 
+# Automation Strategy
+Automation was implemented using:
+- Postman test scripts
+- JavaScript assertions
+- Newman CLI execution
+Assertions validated:
+- Status codes
+- Response structures
+- Response values
+- Performance expectations
+- Invalid requests
 
+# Risk and Mitigation
+Risk: Unathenticated access to protected end points
+Mitigation: perform security tests  to ensure users are not allowed access to protected end points
+
+# Tools Used
+- Postman
+- Newman
+- JavaScript
+- GitHub
+- GitHub Actions
+
+# Conclusion
+This project demonstrates:
+- API functional testing
+- Automated API validation
+- Authentication handling
+- Positive and negative test coverage
+- Basic automation workflow integration
+- Secuirity testing
