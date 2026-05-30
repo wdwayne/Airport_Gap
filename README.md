@@ -1,4 +1,5 @@
 # Airport Gap API Testing
+[![Run Postman Tests](https://github.com/wdwayne/Airport_Gap/actions/workflows/post-man.yml/badge.svg)](https://github.com/wdwayne/Airport_Gap/actions/workflows/post-man.yml)
 
 ## 📌 Project Overview
 This project consists of automated API tests for the Airport Gap API using Postman and Newman. this project aims to check the core functionality of the API and ensure they work as expected.
