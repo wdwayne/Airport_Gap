@@ -1,4 +1,4 @@
-# Test Stratagy - Airport Gap API
+# Test Strategy - Airport Gap API
 
 ## Project Overview
 The focus of this project is to run automated tests on the Airport Gap API using Postman and Newman.
@@ -24,7 +24,7 @@ The following endpoints were tested:
 
 # Testing Objective
 The objective of this project was to verify the following functionalities
-- AUthentication functionality
+- Authentication functionality
 - Viewing all airports
 - List pagination
 - Calculate airport distances
@@ -60,10 +60,10 @@ Examples:
 - Contents of the headers returned when a request is made
 
 ## Performance Validation
-Basic perfermance to check API return in a reasonable time
+Basic performance to check API return in a reasonable time
 
-# Authentication Stratagy 
-Authenticcation the Airport Gap API was handled via Bearer Authentication inorder to make a request to a protected endpoint a token must be added top the Authentication header.
+# Authentication Strategy 
+Authentication the Airport Gap API was handled via Bearer Authentication in order to make a request to a protected endpoint a token must be added top the Authentication header.
 
 # Test Data Management
 Data was managed using Postman environment variables.
@@ -81,7 +81,7 @@ Assertions validated:
 - Invalid requests
 
 # Risk and Mitigation
-Risk: Unathenticated access to protected end points
+Risk: Unauthenticated access to protected end points
 Mitigation: perform security tests  to ensure users are not allowed access to protected end points
 
 # Tools Used
@@ -98,4 +98,4 @@ This project demonstrates:
 - Authentication handling
 - Positive and negative test coverage
 - Basic automation workflow integration
-- Secuirity testing
+- Security testing

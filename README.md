@@ -1,7 +1,7 @@
 # Airport Gap API Testing
 
 ## 📌 Project Overview
-This project consists of automated API tests for the AIrport Gap API using Postman and Newman. this project aims to check the core functionality of the API and ensure they work as expected.
+This project consists of automated API tests for the Airport Gap API using Postman and Newman. this project aims to check the core functionality of the API and ensure they work as expected.
 
 ## Application Under Test
 - Application: Airport Gap 
@@ -43,7 +43,30 @@ QA deliverables included in this project
 - Tools: Postman, Newman
 
 ## 📁 Project Structure
-
+Airport-Gap-API/
+├──.github/
+|   └── workflows/
+│
+├── postman/
+│   ├── collections/
+│   └── environments/
+│
+├── docs/
+│   ├── test-plan.md
+│   ├── api-test-strategy.md
+│   └── api-test-cases.md
+│
+├── reports/
+│
+├── run-newman.js
+│
+├── .env-example
+│
+├── package.json
+│
+├── package-lock.json
+│
+└── README.md
 
 ## ▶ Running the Tests
 

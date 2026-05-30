@@ -18,9 +18,9 @@ This test plan outlines the test approach and methods used in testing the Airpor
 - Third party integration
 - Database validation
 
-# Test Stratagy
+# Test Strategy
 Tests were conducted using the following methods:
-1. Exploritory Testing 
+1. Exploratory Testing 
 2. Negative Testing
 3. Security Testing
 4. Automation Testing
@@ -33,7 +33,7 @@ Tests were conducted using the following methods:
 - Screenshots
 
 # Risk and Mitigation
-Risk: Unathenticated access to protected end points
+Risk: Unauthenticated access to protected end points
 Mitigation: perform security tests  to ensure users are not allowed access to protected end points
 
 # Entry and Exit Criteria
